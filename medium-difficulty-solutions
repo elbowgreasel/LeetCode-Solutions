@@ -1,0 +1,112 @@
+// Problem: Add Two Numbers 
+// used basic functionality
+
+class Node {
+    constructor(val, next) {
+        this.val = val;
+        this.next = next ? next : null;
+    }
+}
+
+var initializeLinkedListFromArray = (arr) => {
+    if(arr.length === 0){
+        return [];
+    }
+    let head = new Node(arr[0]);
+    let current = head;
+    for(let i = 1; i < arr.length; i++){
+        let newNode = new Node(arr[i]);
+        current.next = newNode;
+        current = current.next;
+    }
+    return head;
+}
+
+var addTwoNumbers = function(l1, l2) {
+    let valOne = []
+    let valTwo = []
+    let valTotal = []
+    while(l1.next){
+        valOne.push(l1.val)
+        l1 = l1.next;
+    }
+    while(l2.next){
+        valTwo.push(l2.val)
+        l2 = l2.next;
+    }
+    valOne.push(l1.val)
+    valTwo.push(l2.val)
+    console.log(`ValOne: ${valOne} ValTwo: ${valTwo}`)
+    if(valOne.length === valTwo.length){
+        for(let i = 0; i < valOne.length - 1; i++){
+            let total = valOne[i] + valTwo[i]
+            while(total >= 10){
+                total -= 10;
+                valOne[i + 1] += 1;
+            }
+            valTotal.push(total)
+        }
+        let total = valOne[valOne.length - 1] + valTwo[valTwo.length - 1]
+        while(total >= 10){
+            if(!valTotal[valOne.length]){
+                valTotal[valOne.length] = 1;
+            }
+            else{
+                valTotal[valOne.length] += 1;
+            }
+            total -= 10
+        }
+        valTotal[valOne.length - 1] = total
+        return initializeLinkedListFromArray(valTotal)
+    }
+    else if(valOne.length > valTwo.length){
+        for(let i = 0; i < valOne.length - 1; i++){
+            let total;
+            if(valTwo[i]){
+                total = valOne[i] + valTwo[i]
+            }
+            else{
+                total = valOne[i]
+            }
+            while(total >= 10){
+                total -= 10;
+                valOne[i + 1] += 1;
+            }
+            valTotal.push(total)
+        }
+        let total = valOne[valOne.length - 1]
+        if(total >= 10){
+            valTotal[valOne.length - 1] = total - 10
+            valTotal[valOne.length] = 1
+        }
+        else{
+            valTotal[valOne.length - 1] = total
+        }
+        return initializeLinkedListFromArray(valTotal)
+    }
+    else{
+        for(let i = 0; i < valTwo.length - 1; i++){
+            let total;
+            if(valOne[i]){
+                total = valOne[i] + valTwo[i]
+            }
+            else{
+                total = valTwo[i]
+            }
+            while(total >= 10){
+                total -= 10;
+                valTwo[i + 1] += 1;
+            }
+            valTotal.push(total)
+        }
+        let total = valTwo[valTwo.length - 1]
+        if(total >= 10){
+            valTotal[valTwo.length - 1] = total - 10
+            valTotal[valTwo.length] = 1
+        }
+        else{
+            valTotal[valTwo.length - 1] = total
+        }
+        return initializeLinkedListFromArray(valTotal)
+    }
+};
