@@ -110,3 +110,50 @@ var addTwoNumbers = function(l1, l2) {
         return initializeLinkedListFromArray(valTotal)
     }
 };
+
+// search-a-2d-matrix
+// Unfinished for time exceeding limit, needs to be optimized/refactored.
+
+/**
+ * @param {number[][]} matrix
+ * @param {number} target
+ * @return {boolean}
+ */
+ 
+var searchMatrix = function(matrix, target) {
+    if(matrix[0].length === 1 && matrix.length <= 1){
+        if(matrix[0][0] === target){
+            return true;
+        }
+        return false;
+    }
+    let state = false;
+    let quitEarly = false;
+    while(quitEarly === false){
+        matrix.forEach(arr => {
+            while(arr.length >= 1 && state == false){
+                if(arr.length === 1){
+                    if(arr[0] === target){
+                        state = true;
+                        quitEarly = true;
+                    }
+                    arr.pop()
+                    return
+                }
+                let current = arr[Math.floor(arr.length / 2)]
+                if(current > target){
+                    arr = arr.slice(0, Math.floor(arr.length / 2))
+                }
+                else if(current < target){
+                    arr = arr.slice(Math.floor(arr.length / 2 + 1), arr.length)
+                }
+                else{
+                    state = true
+                    quitEarly = true;
+                }
+            }
+        })
+        quitEarly = true;
+    }
+    return state
+};
