@@ -1,0 +1,87 @@
+class Node{
+  constructor(head, next = null){
+    this.head = head;
+    this.next = next;
+  }
+}
+
+let a = new Node('a');
+let b = new Node('b');
+let c = new Node('c');
+let d = new Node('d');
+let e = new Node('e');
+let f = new Node('f');
+
+a.next = c;
+c.next = e;
+b.next = d;
+d.next = f;
+
+const nodeLength = (node) => {
+  let counter = 1;
+  while(node.next){
+    counter += 1;
+    node = node.next
+  }
+  return counter
+}
+
+const getNodeVals = (node) => {
+  let vals = [node.head]
+  while(node.next){
+    node = node.next;
+    vals.push(node.head)
+  }
+  return vals
+}
+
+const isNode = (node) => {
+  if(node.head && (node.next || node.next === null)){
+    return true;
+  }
+  return false
+}
+
+const zipperNodes = (nodeOne, nodeTwo) => {
+  if(!isNode(nodeOne) || !isNode(nodeTwo)){
+    if(!isNode(nodeOne) && !isNode(nodeTwo)){
+      console.log(`Both nodes are invalid.`)
+      return "neither"
+    }
+    if(isNode(nodeOne)){
+      console.log(`NodeTwo is invalid.`)
+      return nodeOne
+    }
+    console.log(`NodeOne is invalid.`)
+    return nodeTwo
+  }
+  let counter = 0;
+  let current = nodeOne
+  let nodeOnePlace = nodeOne.next;
+  let nodeTwoPlace = nodeTwo
+  while(nodeOnePlace !== null && nodeTwoPlace !== null){
+    if(counter % 2 !== 0){
+      current.next = nodeOnePlace
+      nodeOnePlace = nodeOnePlace.next
+    }
+    else{
+      current.next = nodeTwoPlace
+      nodeTwoPlace = nodeTwoPlace.next
+    }
+    current = current.next
+    counter += 1;
+  }
+  while(nodeOnePlace !== null){
+    current.next = nodeOnePlace
+    current = current.next
+    nodeOnePlace = nodeOnePlace.next
+  }
+  while(nodeTwoPlace !== null){
+    current.next = nodeTwoPlace
+    current = current.next
+    nodeTwoPlace = nodeTwoPlace.next
+  }
+  return nodeOne
+}
+
+console.log(zipperNodes(a, b))
