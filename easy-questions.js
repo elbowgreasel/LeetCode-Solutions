@@ -58,3 +58,29 @@ class ListNode {
         this.next = next;
     }
 }
+
+// Remove Duplicates from Sorted Array
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var removeDuplicates = function(nums) {
+    if(nums.length < 1){
+        return 0
+    }
+    let newArr = [nums[0]]
+    let last = nums[0]
+    for(let i = 1; i < nums.length; i++){
+        if(last !== nums[i]){
+            newArr.push(nums[i])
+            last = nums[i]
+        }
+    }
+    // updating the original list for the requirements of the challenge.
+    for(let i = 0; i < newArr.length; i++){
+        nums[i] = newArr[i]
+    }
+    return newArr.length
+};
+
