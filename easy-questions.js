@@ -99,3 +99,18 @@ var removeElement = function(nums, val) {
 };
 
 
+// Search Insert Position
+
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+var searchInsert = function(nums, target) {
+    for(let num in nums){
+        if(nums[num] >= target){
+            return +num
+        }
+    }
+    return nums.length
+};
