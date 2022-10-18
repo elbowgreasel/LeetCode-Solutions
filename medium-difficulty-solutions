@@ -157,3 +157,35 @@ var searchMatrix = function(matrix, target) {
     }
     return state
 };
+
+// Longest Substring Without Repeating Characters
+
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var lengthOfLongestSubstring = function(s) {
+    if (s.length < 1){
+        return 0
+    }
+    let longest = 1
+    let used = []
+    let counter = 0
+    let index = 0;
+    while(index <= s.length-1){
+        if(used[s[index]]){
+            if(longest < counter){
+                longest = counter;
+            }
+            index -= (counter - 1);
+            counter = 1;
+            used = []
+        }
+        else{
+            counter++
+        }
+        used[s[index]] = 1;
+        index++
+    }
+    return longest > counter ? longest : counter;
+};
