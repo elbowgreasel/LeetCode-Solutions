@@ -1,1 +1,23 @@
-
+// Median of Two Sorted Arrays
+/**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @return {number}
+ */
+var findMedianSortedArrays = function(nums1, nums2) {
+    let nums3 = []
+    while(nums1.length >= 1 && nums2.length >= 1){        
+        if(nums1[0] < nums2[0]){
+            nums3.push(nums1[0])
+            nums1.shift()
+        }
+        else{
+            nums3.push(nums2[0])
+            nums2.shift()
+        }
+    }
+    nums3 = nums1.length > 0 ? nums3.concat(nums1) : nums3.concat(nums2);
+    console.log(nums3)
+    console.log(nums3.length)
+    return nums3.length % 2 == 1 ? nums3[Math.floor(nums3.length / 2)] : (nums3[nums3.length/2 - 1] + nums3[nums3.length/2]) / 2
+};
