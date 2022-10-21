@@ -189,3 +189,40 @@ var lengthOfLongestSubstring = function(s) {
     }
     return longest > counter ? longest : counter;
 };
+
+// Longest Palindromic Substring
+
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var longestPalindrome = function(s) {
+    if(s.length <= 1){
+        return s.length < 1 ? s : s[0]
+    }
+    let longest = 1
+    let word = s[0]
+    for(let i = 0; (i - 1 + longest) < s.length-1 ; i++){
+        for(let j = s.length-1; j > (longest + i - 1); j--){
+            if(s[i] == s[j]){
+                let possibleWord = s.slice(i, j+1)
+                let left = ""
+                let right = ""
+                if(possibleWord.length % 2 == 0){
+                    left = possibleWord.slice(0, possibleWord.length/2)
+                    right = possibleWord.slice(possibleWord.length/2, possibleWord.length)
+                }
+                else{
+                    left = possibleWord.slice(0, Math.floor(possibleWord.length/2))
+                    right = possibleWord.slice(Math.ceil(possibleWord.length/2), possibleWord.length)
+                }
+                right = right.split("").reverse().join("")
+                if(left == right){
+                    word = possibleWord
+                    longest = word.length
+                }
+            }
+        }
+    }
+    return word
+};
