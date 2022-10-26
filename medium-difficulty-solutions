@@ -226,3 +226,51 @@ var longestPalindrome = function(s) {
     }
     return word
 };
+
+# Zigzag Conversion -- Need to make it so it does not exceed time limit, but it does the job.
+
+/**
+ * @param {string} s
+ * @param {number} numRows
+ * @return {string}
+ */
+var convert = function(s, numRows) {
+    if(s.length <= numRows || numRows < 2){
+        return s
+    }
+    let counter = 0
+    let loop = 1
+    let zzlist = {}
+    for(let i = 1; i <= numRows; i++){
+        zzlist[i] = []
+    }
+    while(counter < s.length){
+        if(loop == 1 || loop == numRows){
+            for(let i = 1; i <= numRows; i++){
+                if(counter < s.length){
+                    zzlist[i].push(s[counter])
+                    counter++
+                }
+            }
+            loop = 2
+        }
+        else{
+            for(let i = 1; i <= numRows; i++){
+                if((numRows - (loop - 1)) == i){
+                    zzlist[i].push(s[counter])
+                    counter++
+                }
+                else{
+                    zzlist[i].push("")
+                }
+            }
+            loop++
+        }
+    }
+    newList = []
+    for(let i = 1; i <= numRows; i++){
+        newList = newList.concat(zzlist[i])
+    }
+    console.log(zzlist)
+    return newList.join("")
+};
