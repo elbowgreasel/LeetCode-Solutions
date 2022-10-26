@@ -227,7 +227,7 @@ var longestPalindrome = function(s) {
     return word
 };
 
-# Zigzag Conversion -- Need to make it so it does not exceed time limit, but it does the job.
+# Zigzag Conversion
 
 /**
  * @param {string} s
@@ -255,15 +255,8 @@ var convert = function(s, numRows) {
             loop = 2
         }
         else{
-            for(let i = 1; i <= numRows; i++){
-                if((numRows - (loop - 1)) == i){
-                    zzlist[i].push(s[counter])
-                    counter++
-                }
-                else{
-                    zzlist[i].push("")
-                }
-            }
+            zzlist[(numRows - (loop - 1))].push(s[counter])
+            counter++
             loop++
         }
     }
