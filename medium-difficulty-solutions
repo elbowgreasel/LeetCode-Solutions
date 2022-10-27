@@ -275,19 +275,7 @@ var convert = function(s, numRows) {
  * @return {number}
  */
 var reverse = function(x) {
-    // let xlen = x.toString()
-    // if(xlen.length >= 4294967295){
-    //     return 0
-    // }
-    if(x < 0){
-        x = x * -1
-        x = x.toString().split("").reverse().join("") * -1
-        if(x > 2147483648 || x < -2147483648){
-            return 0
-        }
-        return x
-    }
-    x = x.toString().split("").reverse().join("") * 1
+    x = x < 0 ? (x*-1).toString().split("").reverse().join("")*-1 : x.toString().split("").reverse().join("")
     if(x > 2147483648 || x < -2147483648){
         return 0
     }
