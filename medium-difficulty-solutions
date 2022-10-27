@@ -295,7 +295,7 @@ var myAtoi = function(s) {
         
         if(!isNaN(e) && !nonan){
             operator = true
-            nonnan = true
+            nonan = true
             return e
         }
         else if((e == "-" || e == "+") && !operator && !nonan){
