@@ -114,3 +114,22 @@ var searchInsert = function(nums, target) {
     }
     return nums.length
 };
+
+// Longest Common Prefix
+
+/**
+ * @param {string[]} strs
+ * @return {string}
+ */
+var longestCommonPrefix = function(strs) {
+    let pfs = ""
+    for(let i in strs[0]){
+        for(let j in strs){
+            if(strs[0][i] !== strs[j][i]){
+                return pfs
+            }
+        }
+        pfs = pfs.concat(strs[0][i])
+    }
+    return pfs
+};
