@@ -133,3 +133,24 @@ var longestCommonPrefix = function(strs) {
     }
     return pfs
 };
+
+// Palindrome Number
+
+/**
+ * @param {number} x
+ * @return {boolean}
+ */
+var isPalindrome = function(x) {
+    if(x < 0){
+        return false
+    }
+    x_arr = x.toString().split("")
+    while(x_arr.length > 1){
+        if(x_arr[0] !== x_arr[x_arr.length-1]){
+            return false
+        }
+        x_arr.pop()
+        x_arr.shift()
+    }
+    return true
+};
