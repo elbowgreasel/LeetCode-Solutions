@@ -310,3 +310,45 @@ var myAtoi = function(s) {
     isNaN(s) ? s = 0 : s = +s
     return (s > 2147483647 || s < -2147483648) ? (s < 0 ? -2147483648 : 2147483647) : s
 };
+
+
+// Remove Nth Node From End of List
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @param {number} n
+ * @return {ListNode}
+ */
+
+var removeNthFromEnd = function(head, n) {
+    let list = []
+    let temp = head
+    while(temp){
+        list.push(temp.val)
+        temp = temp.next
+    }
+    let ll = list.length
+    list.splice(ll - n, 1)
+    ll--
+    if(ll == 0){
+        return null
+    }
+    let node = new ListNode(list[0], null)
+    list.shift()
+    let current = node
+    ll--
+    while(ll > 0){
+        current.next = new ListNode(list[0], null)
+        current = current.next
+        list.shift()
+        ll--
+    }
+    return node
+};
