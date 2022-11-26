@@ -154,3 +154,23 @@ var isPalindrome = function(x) {
     }
     return true
 };
+
+// Climbing Stairs
+
+/**
+ * @param {number} n
+ * @return {number}
+ */
+var climbStairs = function(n, memo = {'0': 1}) {
+    count = 0
+    if(memo[n]){
+        return memo[n]
+    }
+    if(n > 1){
+        count += climbStairs(n-2, memo)
+        memo[n] = count 
+    }
+    count += climbStairs(n-1, memo)
+    memo[n] = count
+    return count
+};
