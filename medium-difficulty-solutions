@@ -352,3 +352,56 @@ var removeNthFromEnd = function(head, n) {
     }
     return node
 };
+
+// 3Sum "NEED TO FINISH, IT IS NOT CURRENTLY TIME LIMIT ACCEPTABLE 108/111 TEST CASE PASSES"
+
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var threeSum = function(nums) {
+    if(nums.length < 3){
+        return []
+    }
+    let extra = nums.slice(3, nums.length+1)
+    let extraDic = {}
+    extraFinal = []
+    for(let i in extra){
+        if(extraDic[extra[i]]){
+            extraDic[extra[i]] ++
+        }
+        else{
+            extraDic[extra[i]] = 1
+        }
+    }
+    for(let [key, value] of Object.entries(extraDic)){
+        if(value > 1){
+            extraFinal.push(+key)
+        }
+        if(value > 2){
+            extraFinal.push(+key)
+        }
+        extraFinal.push(+key)
+    }
+    nums = nums.slice(0, 3).concat(extraFinal)
+    let output = []
+    for(let i = 0; i < nums.length; i++){
+        for(let j = 1 + i; j < nums.length; j++){
+            for(let k = 1 + j; k < nums.length; k++){
+                if(nums[i] + nums[j] + nums[k] == 0){
+                    let o = [nums[i], nums[j], nums[k]].sort()
+                    let r = true
+                    for(let item in output){
+                        if(output[item].toString() == o.toString()){
+                            r = false
+                        }
+                    }
+                    if(r){
+                        output.push(o)
+                    }
+                }
+            }
+        }
+    }
+    return output
+};
