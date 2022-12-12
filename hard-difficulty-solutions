@@ -21,3 +21,53 @@ var findMedianSortedArrays = function(nums1, nums2) {
     console.log(nums3.length)
     return nums3.length % 2 == 1 ? nums3[Math.floor(nums3.length / 2)] : (nums3[nums3.length/2 - 1] + nums3[nums3.length/2]) / 2
 };
+
+// Trapping Rain Water
+
+/**
+ * @param {number[]} height
+ * @return {number}
+ */
+
+var largest = function(list){
+    let lh = list[0]
+    let li = 0
+    for(let i = 1; i < list.length; i++){
+        if(list[i] >= lh){
+            lh = list[i]
+            li = i
+        }
+    }
+    return[lh, li]
+}
+
+var trap = function(height) {
+    // s = sum // l = greatest left value // r = greatest right value // ri = r's index
+    // c = current // re = result "# of water to add to sum"
+    let s = 0
+    let l = height[0]
+    // iterate over every item in height after the first element and return the largest/max element.
+    let large = largest(height.slice(1))
+    let r = large[0]
+    let ri = large[1]+1
+    // iterate over every element in height except for the first element which starts as l
+    // we then add each iterations result to our sum if it is greater than 0 
+    for(let i = 1; i < height.length; i++){
+        let c = height[i]
+        let re = Math.min(l, r) - c
+        if(re > 0){
+            s += re
+        }
+        // if our current is greater than our left most wall we update it.
+        if(c > l){
+            l = c
+        }
+        // if our current is equal to our right most wall we update it.
+        if(i === ri && i !== height.length-1){
+            large = largest(height.slice(i+1))
+            r = large[0]
+            ri = large[1]+i+1
+        }
+    }
+    return s
+};
