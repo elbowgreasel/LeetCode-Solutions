@@ -388,7 +388,7 @@ var threeSum = function(nums) {
             sD[sL[i]] = 1
         }
     }
-    // start of sloppy repeated code, fix later if not lazy.
+    // start of sloppy repeated code, fix later if not lazy, bruteforce solution.
     let keys = Object.keys(sD)
     let values = Object.values(sD)
     let currentList = createList(keys, values)
@@ -430,4 +430,21 @@ var threeSum = function(nums) {
         }
     }
     return [...finalList]
+};
+
+// House Robber
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var rob = function(nums) {
+    for(let i = nums.length-3; i >= 0; i--){
+        if(i == nums.length-3){
+            nums[i] += nums[i+2]
+        }
+        else{
+            nums[i] += nums[i+2] > nums[i+3] ? nums[i+2] : nums[i+3] 
+        }
+    }
+    return Math.max(...nums.slice(0, 3))
 };
