@@ -187,3 +187,60 @@ var minCostClimbingStairs = function(cost) {
     }
     return cost[0] < cost[1] ? cost[0] : cost[1]
 };
+
+// Roman to Integer
+
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var romanToInt = function(s) {
+    symbolValues = {
+        "I": 1,
+        "V": 5,
+        "X": 10,
+        "L": 50,
+        "C": 100,
+        "D": 500,
+        "M": 1000
+    }
+    let value = 0
+    let i = 0
+    while(i < s.length){
+        if(s[i] == "I"){
+            if(s[i+1] == "V" || s[i+1] == "X"){
+                value += symbolValues[s[i+1]] - symbolValues[s[i]]
+                i += 2
+            }
+            else{
+                value += symbolValues[s[i]]
+                i ++
+            }
+        }
+        else if(s[i] == "X"){
+            if(s[i+1] == "L" || s[i+1] == "C"){
+                value += symbolValues[s[i+1]] - symbolValues[s[i]]
+                i += 2
+            }
+            else{
+                value += symbolValues[s[i]]
+                i ++
+            }
+        }
+        else if(s[i] == "C"){
+            if(s[i+1] == "D" || s[i+1] == "M"){
+                value += symbolValues[s[i+1]] - symbolValues[s[i]]
+                i += 2
+            }
+            else{
+                value += symbolValues[s[i]]
+                i ++
+            }
+        }
+        else{
+            value += symbolValues[s[i]]
+            i ++
+        }
+    }
+    return value
+};
