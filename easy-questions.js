@@ -182,7 +182,6 @@ var climbStairs = function(n, memo = {'0': 1}) {
  * @return {number}
  */
 var minCostClimbingStairs = function(cost) {
-    var minCostClimbingStairs = function(cost) {
     for(let i = cost.length-3; i >= 0; i--){
         cost[i] += cost[i+1] < cost[i+2] ? cost[i+1] : cost[i+2]
     }
