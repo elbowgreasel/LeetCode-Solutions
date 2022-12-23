@@ -1,3 +1,62 @@
+
+
+// Product of Array Except Self
+
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+var productExceptSelf = function(nums) {
+    let pre = []
+    let post = []
+    for(let num in nums){
+        if(pre.length == 0){
+            pre.push(nums[num])
+            post.push(nums[nums.length-1])
+        }
+        else{
+            pre.push(pre[num-1] * nums[num])
+            post.push(post[num-1] * nums[nums.length-num-1])
+        }
+    }
+    let final = []
+    for(let num in nums){
+        if(num == 0 || num == nums.length-1){
+            final.push(num == 0 ? post[nums.length-2] : pre[num-1]) 
+        }
+        else{
+            final.push(pre[num-1] * post[nums.length-num-2])
+        }
+    }
+    return final
+};
+
+// Top K Frequent Elements
+
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number[]}
+ */
+var topKFrequent = function(nums, k) {
+    let hash = {}
+    for(let num in nums){
+        if(hash[nums[num]]){
+            hash[nums[num]] ++
+        }
+        else{
+            hash[nums[num]] = 1
+        }
+    }
+    let final = []
+    let items = [...Object.entries(hash)].sort((a, b) => b[1] - a[1])
+    for(let i = 0; i < k; i++){
+        final.push(items[i][0])
+    }
+    return final
+};
+
+
 // Problem: Add Two Numbers 
 // used basic functionality
 
