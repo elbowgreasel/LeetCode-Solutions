@@ -498,3 +498,45 @@ var countSubstrings = function(s) {
     }
     return counter
 };
+
+// 3Sum
+
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+
+var threeSum = function(nums) {
+    res = []
+    nums = nums.sort((a, b) => a - b)
+
+    for(let i = 0; i < nums.length-2; i++){
+        if(i > 0 && nums[i] == nums[i-1]){
+            continue
+        }
+        else{
+            let l = i + 1
+            let r = nums.length-1
+
+            while(l < r){
+                // numList / numTotal
+                let nl = [nums[i], nums[l], nums[r]]
+                let nt = nl[0] + nl[1] + nl[2]
+                if(nt > 0){
+                    r --
+                }
+                else if(nt < 0){
+                    l ++
+                }
+                else{
+                    res.push(nl)
+                    l ++
+                    while(nums[l] == nums[l-1] && l < r){
+                        l ++
+                    }
+                }
+            }
+        }
+    }
+    return res
+};
