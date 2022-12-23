@@ -540,3 +540,23 @@ var threeSum = function(nums) {
     }
     return res
 };
+
+// Group Anagrams
+
+/**
+ * @param {string[]} strs
+ * @return {string[][]}
+ */
+var groupAnagrams = function(strs) {
+    let hash = {}
+    for(let str in strs){
+        let sors = strs[str].split("").sort().join("")
+        if(hash[sors]){
+            hash[sors].push(strs[str])
+        }
+        else{
+            hash[sors] = [strs[str]]
+        }
+    }
+    return [...(Object.values(hash))]
+};
