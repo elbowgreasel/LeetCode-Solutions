@@ -262,4 +262,30 @@ var twoSum = function(nums, target) {
     }
 };
 
+// Valid Parentheses
 
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var isValid = function(s) {
+    let dic = {
+        "}": "{",
+        "]": "[",
+        ")": "("
+    }
+    let stack = []
+    for(let char in s){
+        let c = s[char]
+        if(c == "[" || c == "(" || c == "{"){
+            stack.push(c)
+        }
+        else{
+            let popped = stack.pop()
+            if(popped !== dic[c]){
+                return false
+            }
+        }
+    }
+    return stack.length == 0
+};
