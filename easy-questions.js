@@ -289,3 +289,33 @@ var isValid = function(s) {
     }
     return stack.length == 0
 };
+
+// Valid Palindrome
+
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+
+ function genCharArray(charA, charZ) {
+    var a = [], i = charA.charCodeAt(0), j = charZ.charCodeAt(0);
+    for (; i <= j; ++i) {
+        a.push(String.fromCharCode(i));
+    }
+    return a;
+}
+
+var isPalindrome = function(s) {
+    let alphabet = genCharArray("a", "z").concat(genCharArray("0", "9"))
+    s = s.toLowerCase().split("").filter(char => alphabet.includes(char))
+    let l = 0 
+    let r = s.length-1
+    while(l < r){
+        if(s[l] !== s[r]){
+            return false
+        }
+        l++
+        r--
+    }
+    return true
+};
